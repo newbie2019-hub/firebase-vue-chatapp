@@ -14,6 +14,13 @@
     </div>
 
     <div class="container mt-5" style="min-height: 80vh; max-height: 80vh; overflow-y: auto" v-else>
+      <div class="row justify-content-end mr-2 ml-2 mb-2">
+        <button class="btn btn-sm btn-control btn-danger" @click.prevent="LeaveRoom"><i class="fas fa-power-off"></i> Leave Room</button>
+      </div>
+      <div class="card p-3 ml-2 mr-2">
+        Room Number: <strong>{{roomNo}}</strong>
+      </div>
+
       <div class="col-12 col-sm-12 col-md-12 col-lg-12 mr-2 msg_history">
         <div v-for="(message, i) in messages" :key="i">
           <div class="row mt-2 ml-1" v-if="message.email != authUser.email">
@@ -31,7 +38,7 @@
         </div>
       </div>
       <div class="input-container">
-        <input type="text" class="form-control" v-model="message" placeholder="Press enter to send message" @keypress.enter="saveMessage">
+          <input type="text" class="form-control" v-model="message" placeholder="Press enter to send message" @keypress.enter="saveMessage">
       </div>
     </div>
 
@@ -91,6 +98,10 @@ export default {
         email: this.authUser['email'],
         photoURL: this.authUser['photoURL'],
       })
+    },
+    LeaveRoom(){
+      this.roomNo = ''
+      this.messages = []
     },
     async joinRoom(){
       if(this.roominput.trim() == '')
@@ -205,4 +216,5 @@ export default {
 p {
   margin-bottom: 0 !important;
 }
+
 </style>
